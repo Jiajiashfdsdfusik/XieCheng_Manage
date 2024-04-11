@@ -194,6 +194,7 @@ const creatData = () => {
 // };
 
 const ManageItem = (props) => {
+    // 通过props拿到稳定的数据，解决点击操作就刷新页面的问题
     const [rejection, setRejection] = useState(""); // 添加拒绝原因的状态变量
     const [rejectID, setRejectID] = useState('0');
     const [isModalOpen, setIsModalOpen] = useState(false);
