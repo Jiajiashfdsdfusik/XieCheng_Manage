@@ -5,7 +5,7 @@ const searchManager = async (req, res) => {
     let datas = []
     try {
         // 搜索所有未被物理删除的游记
-        const sqlSearch = 'SELECT * FROM travel WHERE del=0'
+        const sqlSearch = 'SELECT * FROM travel WHERE deleteOr=0'
         travels = await new Promise((resolve, reject) => {
           db.query(sqlSearch, function (error, dataStr) {
             if (error) {
@@ -63,7 +63,7 @@ const searchManager = async (req, res) => {
         try{
             sqlSearchItem = 'SELECT username FROM user WHERE id=?'
             username = await new Promise((resolve, reject) => {
-                db.query(sqlSearchItem, element.use_id, function (error, dataStr) {
+                db.query(sqlSearchItem, element.user_id, function (error, dataStr) {
                   if (error) {
                     reject(error.message)
                   } else {
