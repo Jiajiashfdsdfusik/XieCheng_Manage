@@ -78,7 +78,6 @@ const searchManager = async (req, res) => {
         datas[index].username = username[0].username
     })
 )
-    console.log(datas)
     res.send(datas)
 
 }
