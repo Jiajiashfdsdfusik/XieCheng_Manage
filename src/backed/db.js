@@ -5,7 +5,8 @@ const db = mysql.createPool({
     host: '127.0.0.1',
     user: 'root',
     password: 'zjj19991118',
-    database: 'yxzmzs'
+    database: 'yxzmzs',
+    // database: 'xiechengdatabase',
 })
 
 // const user = {username: 'yhm', password: '123456yhm', profile: 'YXZ_MZS\\DuckAndMountain\\src\\assets\\profile.png'}

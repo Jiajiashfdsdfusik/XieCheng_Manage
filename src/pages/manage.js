@@ -154,7 +154,7 @@ const images = [
 ];
 let data = [];
 // let datasource = data;
-let datasource = []
+let datasource = [];
 let userpower = 0;
 const creatData = () => {
     for(let i=0; i<data.length; i++){
@@ -193,7 +193,7 @@ const creatData = () => {
 //     });
 // };
 
-const ManageItem = () => {
+const ManageItem = (props) => {
     const [rejection, setRejection] = useState(""); // 添加拒绝原因的状态变量
     const [rejectID, setRejectID] = useState('0');
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -365,7 +365,7 @@ const ManageItem = () => {
         <div className='content_main_manage'>
             <Table
                 columns={columns}
-                dataSource={datasource}
+                dataSource={props.datasource}
                 pagination={{
                 pageSize: 3,
                 }}
@@ -409,7 +409,7 @@ function Manage(props) {
         datasource = [];
         setLoading(false);
       }else{
-        setLoading(true); // 设置数据加载完成
+        setLoading(true);
         // 从数据库中读取游记数据
         fetch(
             `http://${url}:90/loadall`,
@@ -436,7 +436,7 @@ function Manage(props) {
             return;
           };
         if(value !== 0){
-            setLoading(true); // 设置数据加载完成
+            setLoading(true);
             // 从数据库中读取游记数据
             fetch(
                 `http://${url}:90/loadall`,
@@ -448,8 +448,7 @@ function Manage(props) {
             .then(response => response.json())
             .then(json => {
                 data = json
-                datasource = data
-                setLoading(false); // 设置数据加载完成
+                datasource = data;
             })
             datasource = [];
             if(value === 1){
@@ -458,28 +457,25 @@ function Manage(props) {
                         datasource.push(data[i]);
                     }
                 };
-                setLoading(true);
             }else if(value === 2){
                 for(let i = 0; i<data.length; i++){
                     if(data[i].state === '1'){
                         datasource.push(data[i]);
                     }
                 };
-                setLoading(true);
             }else if(value === 3){
                 for(let i = 0; i<data.length; i++){
                     if(data[i].state !== '0' && data[i].state !== '1'){
                         datasource.push(data[i]);
                     }
                 };
-                setLoading(true);
             }
         }else{
             datasource = data;
         }
         console.log(`select ${value}`);
         setKey(value);
-        setLoading(false);
+        setLoading(false); // 设置数据加载完成
     };
 
     return(
@@ -500,7 +496,7 @@ function Manage(props) {
         <Content className='content'>
             {loading ? (
                 <div>Loading...</div> // 数据加载中显示的提示
-            ) : (<ManageItem key={key}/>)
+            ) : (<ManageItem key={key} datasource={datasource}/>)
             }
             {/* <ManageItem key={key}/> */}
         </Content>
