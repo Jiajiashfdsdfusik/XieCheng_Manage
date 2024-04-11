@@ -26,8 +26,8 @@ const searchManager = async (req, res) => {
             content: travels[i].content,
             state: travels[i].state,
             open: travels[i].open,
-            delete: travels[i].del,
-            userID: travels[i].use_id,
+            delete: travels[i].deleteOr,
+            userID: travels[i].user_id,
             username: '',
             date: travels[i].date,
             imgurl: [],
@@ -78,7 +78,7 @@ const searchManager = async (req, res) => {
         datas[index].username = username[0].username
     })
 )
-
+    console.log(datas)
     res.send(datas)
 
 }
